@@ -1,0 +1,731 @@
+; this is a comment
+; ## is a number , 
+; #$ is a var created by the user and 
+; #& is a label made by the user
+; #@ is a string made by the user
+; #name are defined lists
+
+;this is how to define a list
+
+;List Definitions
+;x86 Base Registers
+
+%#r32
+?eax
+?ecx
+?ebx
+?edx
+?esi
+?edi
+?esp
+?ebp
+
+%#r16
+?ax
+?cx
+?bx
+?dx
+?si
+?di
+?sp
+?bp
+
+%#r8
+?ah
+?al
+?bh
+?bl
+?ch
+?cl
+?dh
+?dl
+
+;here we merge 3 lists..
+%#RegAll
+?#r8
+?#r16
+?#r32
+
+;x86 memory types
+;need to be improved , both here and on isml code
+
+%#m32
+?dword ptr [eax]
+?dword ptr [ecx]
+?dword ptr [ebx]
+?dword ptr [edx]
+?dword ptr [esi]
+?dword ptr [edi]
+?dword ptr [esp]
+?dword ptr [ebp]
+
+%#m16
+?word ptr [eax]
+?word ptr [ecx]
+?word ptr [ebx]
+?word ptr [edx]
+?word ptr [esi]
+?word ptr [edi]
+?word ptr [esp]
+?word ptr [ebp]
+
+%#m8
+?byte ptr [eax]
+?byte ptr [ecx]
+?byte ptr [ebx]
+?byte ptr [edx]
+?byte ptr [esi]
+?byte ptr [edi]
+?byte ptr [esp]
+?byte ptr [ebp]
+
+%#m64
+?[eax]
+?[ecx]
+?[ebx]
+?[edx]
+?[esi]
+?[edi]
+?[esp]
+?[ebp]
+
+%#m80
+?[eax]
+?[ecx]
+?[ebx]
+?[edx]
+?[esi]
+?[edi]
+?[esp]
+?[ebp]
+
+%#m128
+?#m64
+
+%#m512byte
+?#m64
+
+;xmm propably this will include olny 8,16 & 32 
+%#mem
+?#m32
+?#m16
+?#m8
+?#m80
+?#m64
+?#m128
+?#m512byte
+
+;Fp lists.. [none for now :P]
+
+
+;Other Lists..
+
+
+;xmm
+%#xmm
+?xmm0
+?xmm1
+?xmm2
+?xmm3
+?xmm4
+?xmm5
+?xmm6
+?xmm7
+
+%#mmx
+?mm0
+?mm1
+?mm2
+?mm3
+?mm4
+?mm5
+?mm6
+?mm7
+
+
+
+
+
+
+
+;$ : we declare asm intructions
+;! means popup list , ~ means tooltip ,* means both
+;asm keywords can be overloaded as long as they do not 
+;share something on the first par
+;
+;Rules to folow:
+;the text is case sensitive by defalt
+;the _ means space...
+;more spaces are made one (eg dword       ptr myvar -> 
+;dword ptr myvar)
+;to define case non sesitive text use @<nocase>
+;eg
+
+;$*@"mov" [#RegAll,#&] @<any><prv><nxt>" ," [#RegAll,##,#&]
+;$*@"add" [#RegAll,#&] @<any><prv><nxt>" ," [#RegAll,##,#&]
+;$*@"sub" [#RegAll,#&] @<any><prv><nxt>" ," [#RegAll,##,#&]
+
+$*@"aaa" 
+$*@"aad"  ## 
+$*@"aam"  ## 
+$*@"aas" 
+$*@"adc" [#RegAll,#mem] @<any><prv><nxt>" ," [#RegAll,##,#mem] 
+$*@"add" [#RegAll,#mem] @<any><prv><nxt>" ," [#RegAll,##,#mem] 
+$*@"addpd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"addps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"addsd"  #xmm @<any><prv><nxt>" ," [#xmm,#m64] 
+$*@"addss"  #xmm @<any><prv><nxt>" ," [#xmm,#m32] 
+$*@"addsubpd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"addsubps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"and" [#RegAll,#mem] @<any><prv><nxt>" ," [#RegAll,##,#mem] 
+$*@"andnpd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"andnps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"andpd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"andps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"arpl" [#r16,#m16] @<any><prv><nxt>" ,"  #r16 
+$*@"bound" [#r16,#r32] @<any><prv><nxt>" ," [#@] 
+$*@"bsf" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"bsr" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"bswap"  #r32 
+$*@"bt" [#r16,#m16,#r32,#m32] @<any><prv><nxt>" ," [#r16,#r32,##] 
+$*@"btc" [#r16,#m16,#r32,#m32] @<any><prv><nxt>" ," [##,#r16,#r32] 
+$*@"btr" [#r16,#m16,#r32,#m32] @<any><prv><nxt>" ," [#r16,#r32,##] 
+$*@"bts" [#r16,#m16,#r32,#m32] @<any><prv><nxt>" ," [#r16,#r32,##] 
+$*@"call" [#@,#&,#r16,#m16,#r32,#m32] 
+$*@"cbw" 
+$*@"cdq" 
+$*@"clc" 
+$*@"cld" 
+$*@"clflush"  #m8 
+$*@"cli" 
+$*@"clts" 
+$*@"cmc" 
+$*@"cmova" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovae" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovb" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovbe" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovc" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmove" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovg" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovge" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovl" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovle" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovna" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovnae" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovnb" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovnbe" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovnc" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovne" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovng" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovnge" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovnl" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovnle" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovno" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovnp" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovns" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovnz" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovo" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovp" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovpe" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovpo" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovs" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmovz" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"cmp" [#RegAll,#mem] @<any><prv><nxt>" ," [#RegAll,##,#mem] 
+$*@"cmpeqpd"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpeqps"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpeqsd"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpeqss"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmplepd"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpleps"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmplesd"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpless"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpltpd"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpltps"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpltsd"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpltss"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpneqpd"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpneqps"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpneqsd"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpneqss"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpnlepd"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpnleps"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpnlesd"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpnless"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpnltpd"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpnltps"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpnltsd"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpnltss"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpordpd"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpordps"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpordsd"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpordss"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmppd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] @<any><prv><nxt>" ,"  ## 
+$*@"cmpps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] @<any><prv><nxt>" ,"  ## 
+$*@"cmpsb" 
+$*@"cmpsd"  #xmm @<any><prv><nxt>" ," [#xmm,#m64] @<any><prv><nxt>" ,"  ## 
+$*@"cmpss"  #xmm @<any><prv><nxt>" ," [#xmm,#m32] @<any><prv><nxt>" ,"  ## 
+$*@"cmpsw" 
+$*@"cmpunordpd"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpunordps"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpunordsd"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpunordss"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"cmpxchg" [#RegAll,#mem] @<any><prv><nxt>" ," [#RegAll] 
+$*@"cmpxchg8b"  #m64 
+$*@"comisd"  #xmm @<any><prv><nxt>" ," [#xmm,#m64] 
+$*@"comiss"  #xmm @<any><prv><nxt>" ," [#xmm,#m32] 
+$*@"cpuid" 
+$*@"cvtdq2pd"  #xmm @<any><prv><nxt>" ," [#xmm,#m64] 
+$*@"cvtdq2ps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"cvtpd2dq"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"cvtpd2pi"  #mmx @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"cvtpd2ps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"cvtpi2pd"  #xmm @<any><prv><nxt>" ," [#mmx,#m64] 
+$*@"cvtpi2ps"  #xmm @<any><prv><nxt>" ," [#mmx,#m64] 
+$*@"cvtps2dq"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"cvtps2pd"  #xmm @<any><prv><nxt>" ," [#xmm,#m64] 
+$*@"cvtps2pi"  #mmx @<any><prv><nxt>" ," [#xmm,#m64] 
+$*@"cvtsd2si"  #r32 @<any><prv><nxt>" ," [#xmm,#m64] 
+$*@"cvtsd2ss"  #xmm @<any><prv><nxt>" ," [#xmm,#m64] 
+$*@"cvtsi2sd"  #xmm @<any><prv><nxt>" ," [#r32,#m32] 
+$*@"cvtsi2ss"  #xmm @<any><prv><nxt>" ," [#r32,#m32] 
+$*@"cvtss2sd"  #xmm @<any><prv><nxt>" ," [#xmm,#m32] 
+$*@"cvtss2si"  #r32 @<any><prv><nxt>" ," [#xmm,#m32] 
+$*@"cvttpd2dq"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"cvttpd2pi"  #mmx @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"cvttps2dq"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"cvttps2pi"  #mmx @<any><prv><nxt>" ," [#xmm,#m64] 
+$*@"cvttsd2si"  #r32 @<any><prv><nxt>" ," [#xmm,#m64] 
+$*@"cvttss2si"  #r32 @<any><prv><nxt>" ," [#xmm,#m32] 
+$*@"cwd" 
+$*@"cwde" 
+$*@"daa" 
+$*@"das" 
+$*@"dec" [#RegAll,#mem] 
+$*@"div" [#RegAll,#mem] 
+$*@"divpd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"divps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"divsd"  #xmm @<any><prv><nxt>" ," [#xmm,#m64] 
+$*@"divss"  #xmm @<any><prv><nxt>" ," [#xmm,#m32] 
+$*@"emms" 
+$*@"enter"  ## @<any><prv><nxt>" ,"  ## 
+$*@"f2xm1" 
+$*@"fabs" 
+$*@"fadd" [#m32,#@,#m64] @<any><prv><nxt>" ," [#@] 
+$*@"faddp"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"fbld"  #@ 
+$*@"fbstp"  #@ 
+$*@"fchs" 
+$*@"fclex" 
+$*@"fcmovb"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"fcmovbe"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"fcmove"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"fcmovnb"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"fcmovnbe"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"fcmovne"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"fcmovnu"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"fcmovu"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"fcom" [#m32,#@,#m64] 
+$*@"fcomi"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"fcomip"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"fcomp" [#m32,#@,#m64] 
+$*@"fcompp" 
+$*@"fcos" 
+$*@"fdecstp" 
+$*@"fdiv" [#m32,#@,#m64] @<any><prv><nxt>" ," [#@] 
+$*@"fdivp"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"fdivr" [#m32,#@,#m64] @<any><prv><nxt>" ," [#@] 
+$*@"fdivrp"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"ffree"  #@ 
+$*@"fiadd" [#@] 
+$*@"ficom" [#@] 
+$*@"ficomp" [#@] 
+$*@"fidiv" [#@] 
+$*@"fidivr" [#@] 
+$*@"fild" [#@] 
+$*@"fimul" [#@] 
+$*@"fincstp" 
+$*@"finit" 
+$*@"fist" [#@] 
+$*@"fistp" [#@] 
+$*@"fisttp" [#@] 
+$*@"fisub" [#@] 
+$*@"fisubr" [#@] 
+$*@"fld" [#m32,#@,#m80,#m64] 
+$*@"fld1" 
+$*@"fldcw"  #@ 
+$*@"fldenv"  #@ 
+$*@"fldl2e" 
+$*@"fldl2t" 
+$*@"fldlg2" 
+$*@"fldln2" 
+$*@"fldpi" 
+$*@"fldz" 
+$*@"fmul" [#m32,#@,#m64] @<any><prv><nxt>" ," [#@] 
+$*@"fmulp"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"fnclex" 
+$*@"fninit" 
+$*@"fnop" 
+$*@"fnsave"  #@ 
+$*@"fnstcw"  #@ 
+$*@"fnstenv"  #@ 
+$*@"fnstsw" [#@,#r16] 
+$*@"fpatan" 
+$*@"fprem" 
+$*@"fprem1" 
+$*@"fptan" 
+$*@"frndint" 
+$*@"frstor"  #@ 
+$*@"fsave"  #@ 
+$*@"fscale" 
+$*@"fsin" 
+$*@"fsincos" 
+$*@"fsqrt" 
+$*@"fst" [#m32,#m64,#@] 
+$*@"fstcw"  #@ 
+$*@"fstenv"  #@ 
+$*@"fstp" [#m32,#m80,#m64,#@] 
+$*@"fstsw" [#@,#r16] 
+$*@"fsub" [#m32,#@,#m64] @<any><prv><nxt>" ," [#@] 
+$*@"fsubp"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"fsubr" [#m32,#@,#m64] @<any><prv><nxt>" ," [#@] 
+$*@"fsubrp"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"ftst" 
+$*@"fucom"  #@ 
+$*@"fucomi"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"fucomip"  #@ @<any><prv><nxt>" ,"  #@ 
+$*@"fucomp"  #@ 
+$*@"fucompp" 
+$*@"fwait" 
+$*@"fxam" 
+$*@"fxch"  #@ 
+$*@"fxrstor"  #m512byte 
+$*@"fxsave"  #m512byte 
+$*@"fxtract" 
+$*@"fyl2x" 
+$*@"fyl2xp1" 
+$*@"haddpd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"haddps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"hlt" 
+$*@"hsubpd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"hsubps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"idiv" [#RegAll,#mem] 
+$*@"imul" [#RegAll,#mem] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32,##] @<any><prv><nxt>" ," [##] 
+$*@"in" [#RegAll] @<any><prv><nxt>" ," [##,#r16] 
+$*@"inc" [#RegAll,#mem] 
+$*@"insb" 
+$*@"insd" 
+$*@"insw" 
+$*@"int" [##] 
+$*@"into" 
+$*@"invd" 
+$*@"invlpg"  #mem 
+$*@"iret" 
+$*@"iretd" 
+$*@"ja" [#&] 
+$*@"jae" [#&] 
+$*@"jb" [#&] 
+$*@"jbe" [#&] 
+$*@"jc" [#&] 
+$*@"jcxz"  #& 
+$*@"je" [#&] 
+$*@"jecxz"  #& 
+$*@"jg" [#&] 
+$*@"jge" [#&] 
+$*@"jl" [#&] 
+$*@"jle" [#&] 
+$*@"jmp" [#&,#@,#r16,#m16,#r32,#m32] 
+$*@"jna" [#&] 
+$*@"jnae" [#&] 
+$*@"jnb" [#&] 
+$*@"jnbe" [#&] 
+$*@"jnc" [#&] 
+$*@"jne" [#&] 
+$*@"jng" [#&] 
+$*@"jnge" [#&] 
+$*@"jnl" [#&] 
+$*@"jnle" [#&] 
+$*@"jno" [#&] 
+$*@"jnp" [#&] 
+$*@"jns" [#&] 
+$*@"jnz" [#&] 
+$*@"jo" [#&] 
+$*@"jp" [#&] 
+$*@"jpe" [#&] 
+$*@"jpo" [#&] 
+$*@"js" [#&] 
+$*@"jz" [#&] 
+$*@"lahf" 
+$*@"lar" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"lddqu"  #xmm @<any><prv><nxt>" ,"  #m128 
+$*@"ldmxcsr"  #m32 
+$*@"lds" [#r16,#r32] @<any><prv><nxt>" ," [#@] 
+$*@"lea" [#r16,#r32] @<any><prv><nxt>" ," [#mem] 
+$*@"leave" 
+$*@"les" [#r16,#r32] @<any><prv><nxt>" ," [#@] 
+$*@"lfence" 
+$*@"lfs" [#r16,#r32] @<any><prv><nxt>" ," [#@] 
+$*@"lgdt"  #@ 
+$*@"lgs" [#r16,#r32] @<any><prv><nxt>" ," [#@] 
+$*@"lidt"  #@ 
+$*@"lldt" [#r16,#m16] 
+$*@"lmsw" [#r16,#m16] 
+$*@"lock" 
+$*@"lodsb" 
+$*@"lodsd" 
+$*@"lodsw" 
+$*@"loop"  #& 
+$*@"loope"  #& 
+$*@"loopne"  #& 
+$*@"loopnz"  #& 
+$*@"loopz"  #& 
+$*@"lsl" [#r16,#r32] @<any><prv><nxt>" ," [#r16,#m16,#r32,#m32] 
+$*@"lss" [#r16,#r32] @<any><prv><nxt>" ," [#@] 
+$*@"ltr" [#r16,#m16] 
+$*@"maskmovdqu"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"maskmovq"  #mmx @<any><prv><nxt>" ,"  #mmx 
+$*@"maxpd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"maxps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"maxsd"  #xmm @<any><prv><nxt>" ," [#xmm,#m64] 
+$*@"maxss"  #xmm @<any><prv><nxt>" ," [#xmm,#m32] 
+$*@"mfence" 
+$*@"minpd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"minps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"minsd"  #xmm @<any><prv><nxt>" ," [#xmm,#m64] 
+$*@"minss"  #xmm @<any><prv><nxt>" ," [#xmm,#m32] 
+$*@"monitor" 
+$*@"mov" [#RegAll,#@,#mem] @<any><prv><nxt>" ," [#RegAll,#@,##,#mem] 
+$*@"movapd" [#xmm,#m128] @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"movaps" [#xmm,#m128] @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"movd" [#mmx,#r32,#m32,#xmm] @<any><prv><nxt>" ," [#r32,#m32,#mmx,#xmm] 
+$*@"movddup"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"movdq2q"  #mmx @<any><prv><nxt>" ,"  #xmm 
+$*@"movdqa" [#xmm,#m128] @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"movdqu" [#xmm,#m128] @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"movhlps"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"movhpd" [#xmm,#m64] @<any><prv><nxt>" ," [#m64,#xmm] 
+$*@"movhps" [#xmm,#m64] @<any><prv><nxt>" ," [#m64,#xmm] 
+$*@"movlhps"  #xmm @<any><prv><nxt>" ,"  #xmm 
+$*@"movlpd" [#xmm,#m64] @<any><prv><nxt>" ," [#m64,#xmm] 
+$*@"movlps" [#xmm,#m64] @<any><prv><nxt>" ," [#m64,#xmm] 
+$*@"movmskpd"  #r32 @<any><prv><nxt>" ,"  #xmm 
+$*@"movmskps"  #r32 @<any><prv><nxt>" ,"  #xmm 
+$*@"movntdq"  #m128 @<any><prv><nxt>" ,"  #xmm 
+$*@"movnti"  #m32 @<any><prv><nxt>" ,"  #r32 
+$*@"movntpd"  #m128 @<any><prv><nxt>" ,"  #xmm 
+$*@"movntps"  #m128 @<any><prv><nxt>" ,"  #xmm 
+$*@"movntq"  #m64 @<any><prv><nxt>" ,"  #mmx 
+$*@"movq" [#mmx,#m64,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm] 
+$*@"movq2dq"  #xmm @<any><prv><nxt>" ,"  #mmx 
+$*@"movsb" 
+$*@"movsd" [#xmm,#m64] @<any><prv><nxt>" ," [#xmm,#m64] 
+$*@"movshdup"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"movsldup"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"movss" [#xmm,#m32] @<any><prv><nxt>" ," [#xmm,#m32] 
+$*@"movsw" 
+$*@"movsx" [#r16,#r32] @<any><prv><nxt>" ," [#r8,#m8,#r16,#m16] 
+$*@"movupd" [#xmm,#m128] @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"movups" [#xmm,#m128] @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"movzx" [#r16,#r32] @<any><prv><nxt>" ," [#r8,#m8,#r16,#m16] 
+$*@"mul" [#RegAll,#mem] 
+$*@"mulpd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"mulps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"mulsd"  #xmm @<any><prv><nxt>" ," [#xmm,#m64] 
+$*@"mulss"  #xmm @<any><prv><nxt>" ," [#xmm,#m32] 
+$*@"mwait" 
+$*@"neg" [#RegAll,#mem] 
+$*@"nop" 
+$*@"not" [#RegAll,#mem] 
+$*@"or" [#RegAll,#mem] @<any><prv><nxt>" ," [#RegAll,##,#mem] 
+$*@"orpd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"orps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"out" [##,#r16] @<any><prv><nxt>" ," [#RegAll] 
+$*@"outsb" 
+$*@"outsd" 
+$*@"outsw" 
+$*@"packssdw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#xmm,#m128] 
+$*@"packsswb" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#xmm,#m128] 
+$*@"packuswb" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"paddb" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"paddd" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"paddq" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#xmm,#m128] 
+$*@"paddsb" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"paddsw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"paddusb" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"paddusw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"paddw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"pand" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"pandn" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"pause" 
+$*@"pavgb" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#xmm,#m128] 
+$*@"pavgw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#xmm,#m128] 
+$*@"pcmpeqb" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"pcmpeqd" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"pcmpeqw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"pcmpgtb" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"pcmpgtd" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"pcmpgtw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"pextrw" [#r32] @<any><prv><nxt>" ," [#mmx,#xmm] @<any><prv><nxt>" ," [##] 
+$*@"pinsrw" [#mmx,#xmm] @<any><prv><nxt>" ," [#r32,#m16] @<any><prv><nxt>" ," [##] 
+$*@"pmaddwd" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"pmaxsw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#xmm,#m128] 
+$*@"pmaxub" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#xmm,#m128] 
+$*@"pminsw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#xmm,#m128] 
+$*@"pminub" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#xmm,#m128] 
+$*@"pmovmskb" [#r32] @<any><prv><nxt>" ," [#mmx,#xmm] 
+$*@"pmulhuw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#xmm,#m128] 
+$*@"pmulhw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"pmullw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"pmuludq" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#xmm,#m128] 
+$*@"pop" [#r32,#r16,#m16,#m32] 
+$*@"popa" 
+$*@"popad" 
+$*@"popf" 
+$*@"popfd" 
+$*@"por" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"prefetchnta"  #m8 
+$*@"prefetcht0"  #m8 
+$*@"prefetcht1"  #m8 
+$*@"prefetcht2"  #m8 
+$*@"psadbw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#xmm,#m128] 
+$*@"pshufd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] @<any><prv><nxt>" ,"  ## 
+$*@"pshufhw"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] @<any><prv><nxt>" ,"  ## 
+$*@"pshuflw"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] @<any><prv><nxt>" ,"  ## 
+$*@"pshufw"  #mmx @<any><prv><nxt>" ,"  #mmx @<any><prv><nxt>" ,"  ## 
+$*@"pslld" [#mmx,#xmm] @<any><prv><nxt>" ," [##,#mmx,#m64,#xmm,#m128] 
+$*@"pslldq"  #xmm @<any><prv><nxt>" ,"  ## 
+$*@"psllq" [#mmx,#xmm] @<any><prv><nxt>" ," [##,#mmx,#m64,#xmm,#m128] 
+$*@"psllw" [#mmx,#xmm] @<any><prv><nxt>" ," [##,#mmx,#m64,#xmm,#m128] 
+$*@"psrad" [#mmx,#xmm] @<any><prv><nxt>" ," [##,#mmx,#m64,#xmm,#m128] 
+$*@"psraw" [#mmx,#xmm] @<any><prv><nxt>" ," [##,#mmx,#m64,#xmm,#m128] 
+$*@"psrld" [#mmx,#xmm] @<any><prv><nxt>" ," [##,#mmx,#m64,#xmm,#m128] 
+$*@"psrldq"  #xmm @<any><prv><nxt>" ,"  ## 
+$*@"psrlq" [#mmx,#xmm] @<any><prv><nxt>" ," [##,#mmx,#m64,#xmm,#m128] 
+$*@"psrlw" [#mmx,#xmm] @<any><prv><nxt>" ," [##,#mmx,#m64,#xmm,#m128] 
+$*@"psubb" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"psubd" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"psubq" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#xmm,#m128] 
+$*@"psubsb" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"psubsw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"psubusb" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"psubusw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"psubw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"punpckhbw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"punpckhdq" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"punpckhqdq"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"punpckhwd" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"punpcklbw" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m32,#xmm,#m128] 
+$*@"punpckldq" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m32,#xmm,#m128] 
+$*@"punpcklqdq"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"punpcklwd" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m32,#xmm,#m128] 
+$*@"push" [#r32,#r16,##,#m16,#m32] 
+$*@"pusha" 
+$*@"pushad" 
+$*@"pushf" 
+$*@"pushfd" 
+$*@"pxor" [#mmx,#xmm] @<any><prv><nxt>" ," [#mmx,#m64,#xmm,#m128] 
+$*@"rcl" [#RegAll,#mem] @<any><prv><nxt>" ," [##,#@] 
+$*@"rcpps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"rcpss"  #xmm @<any><prv><nxt>" ," [#xmm,#m32] 
+$*@"rcr" [#RegAll,#mem] @<any><prv><nxt>" ," [##,#@] 
+$*@"rdmsr" 
+$*@"rdpmc" 
+$*@"rdtsc" 
+$*@"rep" 
+$*@"repe" 
+$*@"repne" 
+$*@"ret"  ## 
+$*@"retf"  ## 
+$*@"rol" [#RegAll,#mem] @<any><prv><nxt>" ," [##,#@] 
+$*@"ror" [#RegAll,#mem] @<any><prv><nxt>" ," [##,#@] 
+$*@"rsm" 
+$*@"rsqrtps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"rsqrtss"  #xmm @<any><prv><nxt>" ," [#xmm,#m32] 
+$*@"sahf" 
+$*@"sal" [#RegAll,#mem] @<any><prv><nxt>" ," [##,#@] 
+$*@"sar" [#RegAll,#mem] @<any><prv><nxt>" ," [##,#@] 
+$*@"sbb" [#RegAll,#mem] @<any><prv><nxt>" ," [#RegAll,##,#mem] 
+$*@"scasb" 
+$*@"scasd" 
+$*@"scasw" 
+$*@"seta" [#r8,#m8] 
+$*@"setae" [#r8,#m8] 
+$*@"setb" [#r8,#m8] 
+$*@"setbe" [#r8,#m8] 
+$*@"setc" [#r8,#m8] 
+$*@"sete" [#r8,#m8] 
+$*@"setg" [#r8,#m8] 
+$*@"setge" [#r8,#m8] 
+$*@"setl" [#r8,#m8] 
+$*@"setle" [#r8,#m8] 
+$*@"setna" [#r8,#m8] 
+$*@"setnae" [#r8,#m8] 
+$*@"setnb" [#r8,#m8] 
+$*@"setnbe" [#r8,#m8] 
+$*@"setnc" [#r8,#m8] 
+$*@"setne" [#r8,#m8] 
+$*@"setng" [#r8,#m8] 
+$*@"setnge" [#r8,#m8] 
+$*@"setnl" [#r8,#m8] 
+$*@"setnle" [#r8,#m8] 
+$*@"setno" [#r8,#m8] 
+$*@"setnp" [#r8,#m8] 
+$*@"setns" [#r8,#m8] 
+$*@"setnz" [#r8,#m8] 
+$*@"seto" [#r8,#m8] 
+$*@"setp" [#r8,#m8] 
+$*@"setpe" [#r8,#m8] 
+$*@"setpo" [#r8,#m8] 
+$*@"sets" [#r8,#m8] 
+$*@"setz" [#r8,#m8] 
+$*@"sfence" 
+$*@"sgdt"  #mem 
+$*@"shl" [#RegAll,#mem] @<any><prv><nxt>" ," [##,#@] 
+$*@"shld" [#r16,#m16,#r32,#m32] @<any><prv><nxt>" ," [#r16,#r32] @<any><prv><nxt>" ," [##,#@] 
+$*@"shr" [#RegAll,#mem] @<any><prv><nxt>" ," [##,#@] 
+$*@"shrd" [#r16,#m16,#r32,#m32] @<any><prv><nxt>" ," [#r16,#r32] @<any><prv><nxt>" ," [##,#@] 
+$*@"shufpd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] @<any><prv><nxt>" ,"  ## 
+$*@"shufps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] @<any><prv><nxt>" ,"  ## 
+$*@"sidt"  #mem 
+$*@"sldt" [#r16,#m16,#r32,#m32] 
+$*@"smsw" [#r16,#m16,#r32] 
+$*@"sqrtpd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"sqrtps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"sqrtsd"  #xmm @<any><prv><nxt>" ," [#xmm,#m64] 
+$*@"sqrtss"  #xmm @<any><prv><nxt>" ," [#xmm,#m32] 
+$*@"stc" 
+$*@"std" 
+$*@"sti" 
+$*@"stmxcsr"  #m32 
+$*@"stosb" 
+$*@"stosd" 
+$*@"stosw" 
+$*@"str" [#r16,#m16] 
+$*@"sub" [#RegAll,#mem] @<any><prv><nxt>" ," [#RegAll,##,#mem] 
+$*@"subpd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"subps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"subsd"  #xmm @<any><prv><nxt>" ," [#xmm,#m64] 
+$*@"subss"  #xmm @<any><prv><nxt>" ," [#xmm,#m32] 
+$*@"sysenter" 
+$*@"sysexit" 
+$*@"test" [#RegAll,#mem] @<any><prv><nxt>" ," [#RegAll,##] 
+$*@"ucomisd"  #xmm @<any><prv><nxt>" ," [#xmm,#m64] 
+$*@"ucomiss"  #xmm @<any><prv><nxt>" ," [#xmm,#m32] 
+$*@"ud2" 
+$*@"unpckhpd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"unpckhps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"unpcklpd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"unpcklps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"verr" [#r16,#m16] 
+$*@"verw" [#r16,#m16] 
+$*@"wait" 
+$*@"wbinvd" 
+$*@"wrmsr" 
+$*@"xadd" [#RegAll,#mem] @<any><prv><nxt>" ," [#RegAll] 
+$*@"xchg" [#RegAll,#mem] @<any><prv><nxt>" ," [#RegAll,#mem] 
+$*@"xlatb" 
+$*@"xor" [#RegAll,#mem] @<any><prv><nxt>" ," [#RegAll,##,#mem] 
+$*@"xorpd"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+$*@"xorps"  #xmm @<any><prv><nxt>" ," [#xmm,#m128] 
+
+
+

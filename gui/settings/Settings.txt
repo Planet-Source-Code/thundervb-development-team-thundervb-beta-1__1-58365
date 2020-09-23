@@ -1,0 +1,64 @@
+Tab General
+***********
+-Load On StartUp       - will load add-in on start-up
+-UnLoad if Project.... - unload add-in if the new Project is not Standart EXE app
+
+-popup exports... - when user will compile source, show StdCall Tab where can user mark exported functions, change base address
+-set topmost - like vbinlineasm - make all add-in windows topmost, be aware of msgboxes
+
+-listings... - like vbinlineasm
+-fix listings... - fix them
+-save ...    - like vbinlineasm
+
+-compile asm code - compile asm code :-)
+-compile c code - compile c code :-)
+-hook compiler    - hook compiler
+
+-add tlb if needed  - WILL BE CHANGED - when TLB generators will be finished
+-hide error dialogs - hide linker errors msgboxes
+
+Tab Paths
+*********
+-no comment
+
+Tab Packer
+**********
+-no comment
+
+Tab Code colors
+***************
+-will be upgraded when you will finish the coloring code - WILL BE CHANGED
+
+Tab Debug
+*********
+like vbinlineasm
+
+commands - Delete all files in /debug - I will write the neccessary code
+         - Delete /debug              - I will write the neccessary code
+
+Tab Compile
+***********
+like vbinlineasm
+
+Tab StdCall DLL
+***************
+-Create DLL - link DLL
+-Export functions - export functions from DLL or EXE (note EXE could export functions too)
+list of exported functions - TODO
+-Base Address - base address of EXE or DLL, if is zero then use default value for EXE or DLL - decimal value
+-Entry-Point - use only if "Create DLL" is checked (rename entry-point) - if the string is zero then use default value e.g. DLLMain
+
+note - preloader = our asm code to do initializing
+
+-use preloader          - use asm code to do initializing
+-debug preloader code   - will add "int 3" to preloader code -> user could debug asm code in debugger (eg w32dasm)
+-patch preloader code   - we look for VB5! to locate the VB structure (needed by ThunRTMain)
+ maybe exist better way - what about scanning .obj or .lst to locate it? and patch asm code
+ 
+ push <pointer>   - patch this
+ call ThunRTMain
+ 
+-vb runtime partial loading - if the caller is VB app and DLL does not contain forms
+ loading msvbvm70.dll is not necessary.
+ 
+ note - another instance of msvbvm60.dll is needed only if DLL contain forms and caller is VB app

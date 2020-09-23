@@ -1,0 +1,3 @@
+Private Declare Function rtcEndOfFile Lib "msvbvm60.dll" (ByVal lFileNumber As Long) As Boolean
+Private Declare Function rtcDoEvents Lib "msvbvm60.dll" () As Integer
+Private Declare Sub rtcRemoveDir Lib "msvbvm60.dll" (ByVal pPath As Long)
