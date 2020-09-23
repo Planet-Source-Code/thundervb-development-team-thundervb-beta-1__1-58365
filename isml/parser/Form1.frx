@@ -1,0 +1,74 @@
+ÿ; this is a comment
+; ## is a number , 
+; #$ is a var created by the user and 
+; #& is a label made by the user
+; #@ is a string made by the user
+; #name are defined lists
+
+;this is how to define a list
+
+%#Reg32
+?eax
+?ecx
+?ebx
+?edx
+?esi
+?edi
+?esp
+?ebp
+
+%#Reg16
+?ax
+?cx
+?bx
+?dx
+?si
+?di
+?sp
+?bp
+
+%#Reg8
+?ah
+?al
+?bh
+?bl
+?ch
+?cl
+?dh
+?dl
+
+;hrere we merge 3 lists..
+%#RegAll
+?#Reg8
+?#Reg16
+?#Reg32
+
+;$ : we declare asm intructions
+;! means popup list , ~ means tooltip ,* means both
+;eg 
+
+$! @"mov" [#Reg32,#$] @"," [#RegAll,##,#$,#&]
+
+;asm keyword can be overloaded as long as they do not 
+;share something on the first par
+
+$!@"mov" [#Reg8] @"," [#Reg8,##,#$,#&]
+$!@"mov" [#Reg16] @"," [#Reg8,#Reg16,##,#$,#&]
+
+$!@"mov" @"dword_ptr_" [#$] @"," [#Reg8,##,#$,#&]
+
+;Rules to folow
+;the text is case sensitive by defalt
+;the _ means space...
+;more spaces are made one (eg dword       ptr myvar -> 
+;dword ptr myvar)
+;to deine case non sesitive text use @<nocase>
+;eg
+$!@"mov" @<nocase>"dword_ptr_" [#$] @"," [#Reg8,##,#$,#&]
+
+;now ,  this will match this:
+;
+;myvar dd 0
+;
+;mov dword ptr myvar,100
+;

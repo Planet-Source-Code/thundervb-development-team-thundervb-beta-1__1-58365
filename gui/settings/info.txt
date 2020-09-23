@@ -1,0 +1,63 @@
+Hi,
+look at the panel Settings and if you want to add/remove some item/s let me know
+some items are same as in VBINLENEASM settings
+
+I will write all code to save/load settings so do not waste time with it
+all that you will need will be avaible via functions Get_<tab name>.
+This functions will be in modPublic.bas module.
+
+At first write the version that will work on 100% - inline asm, exported functions...
+Then we will add panel Settings.
+
+now look at the Setting Form
+
+Tab Generel
+-Load On StartUp - will load add-in on start-up
+-UnLoad if Project.... - unload add-in if the new Project is not Standart EXE app
+
+-popup exports... - when user will compile source, show window where can user mark
+ exported functions, change base address
+ 
+ note : what about leting user to change name of DLL entry-point? 
+
+-set topmost - like vbinlineasm
+
+-listings... - like vbinlineasm
+-save ...    - like vbinlineasm
+
+- compile asm code - compile asm code :-)
+- hook compiler    - hook compler
+
+Tab Paths
+-no comment
+
+Tab Packer
+-no comment
+
+Tab Code colors
+-will be upgraded when you will finish the coloring code
+
+Tab Debug
+like vbinlineasm
+
+-Tab Compile
+like vbinlineasm
+
+StdCall DLL
+note - preloader = our asm code to do initializing
+
+-use preloader - use asm code to do initializing
+-debug preloader code - will add "int 3" to preloader code -> user could debug asm code in debugger (eg w32dasm)
+-patch preloader code - we look for VB5! to locate the VB structure (needed by ThunRTMain)
+ maybe exist better way - what about scanning .obj or .lst to locate it? and patch asm code
+ 
+ push <pointer>   - patch this
+ call ThunRTMain
+ 
+-vb runtime partial loading - if the caller is VB app and DLL does not contain forms
+ loading msvbvm70.dll is not necessary.
+ 
+ note - another instance of msvbvm60.dll is needed only if DLL contain forms and caller is VB app
+ 
+So if you want to add/remove some settings let me know.
+Libor

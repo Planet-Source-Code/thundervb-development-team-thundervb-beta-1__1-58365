@@ -1,0 +1,128 @@
+[Root]
+Most Recent Package=Thunder VB Test pack
+
+
+[Package|Thunder VB Test pack|Root]
+SubWizProgID=PDWizard.SetupPkgSubWiz
+BuildFolder=C:\develop\vb\vb-projects\Package
+
+[Package|Thunder VB Test pack|Configure DAO ISAMs]
+Applicable=No
+
+[Package|Thunder VB Test pack|Configure DAO ODBC]
+JetWorkspace=
+ODBCDirect=
+
+[Package|Thunder VB Test pack|Files Found]
+ndisasm_dll.dll=C:\develop\vb\vb-projects\ThunderVB\ThunderVB_bin\ndisasm_dll.dll
+
+[Package|Thunder VB Test pack|Files Released]
+
+[Package|Thunder VB Test pack|Missing Dependency Information]
+C:\Documents and Settings\Darken\Desktop\Create_and1791579102004\AllApiDemo\WinApiForVb_tlb\WinApiForVb\Release\WinApiForVb.tlb=
+C:\Program Files\Common Files\Microsoft Shared\OFFICE11\MSO.DLL=
+C:\WINDOWS\system32\psapi.dll=
+
+[Package|Thunder VB Test pack|Out-of-Date Dependency Information]
+C:\WINDOWS\system32\scrrun.dll=
+
+[Package|Thunder VB Test pack|Files Added]
+
+[Package|Thunder VB Test pack|Files Removed]
+c:\windows\system32\comct332.ocx=
+c:\windows\system32\comdlg32.ocx=
+c:\windows\system32\mscomct2.ocx=
+c:\windows\system32\mscomctl.ocx=
+c:\program files\common files\microsoft shared\office11\mso.dll=
+c:\windows\system32\psapi.dll=
+c:\program files\microsoft visual studio\vb98\wizards\pdwizard\redist\riched32.dll=
+c:\windows\system32\richtx32.ocx=
+c:\windows\system32\tabctl32.ocx=
+c:\windows\system32\msvbvm60.dll=
+c:\program files\microsoft visual studio\vb98\wizards\pdwizard\redist\oleaut32.dll=
+c:\program files\microsoft visual studio\vb98\wizards\pdwizard\redist\olepro32.dll=
+c:\program files\microsoft visual studio\vb98\wizards\pdwizard\redist\asycfilt.dll=
+c:\program files\microsoft visual studio\vb98\wizards\pdwizard\redist\stdole2.tlb=
+c:\program files\microsoft visual studio\vb98\wizards\pdwizard\redist\comcat.dll=
+
+[Package|Thunder VB Test pack|Files In Project]
+C:\develop\vb\vb-projects\ThunderVB\ThunderVB_bin\ThunderVB.dll=Yes
+C:\WINDOWS\system32\msvbvm60.dll=No
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEAUT32.DLL=No
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEPRO32.DLL=No
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\ASYCFILT.DLL=No
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\STDOLE2.TLB=No
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=No
+C:\WINDOWS\system32\psapi.dll=No
+C:\develop\vb\vb-projects\ThunderVB\ThunderVB_bin\ndisasm_dll.dll=Yes
+C:\Program Files\Common Files\Microsoft Shared\OFFICE11\MSO.DLL=No
+C:\Documents and Settings\Darken\Desktop\Create_and1791579102004\AllApiDemo\WinApiForVb_tlb\WinApiForVb\Release\WinApiForVb.tlb=Yes
+C:\WINDOWS\system32\TABCTL32.OCX=No
+C:\WINDOWS\system32\COMDLG32.OCX=No
+C:\WINDOWS\system32\MSCOMCTL.OCX=No
+C:\WINDOWS\system32\MSCOMCT2.OCX=No
+C:\WINDOWS\system32\COMCT332.OCX=No
+C:\WINDOWS\system32\RICHTX32.OCX=No
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=No
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=Yes
+C:\WINDOWS\system32\VB6STKIT.DLL=Yes
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=Yes
+
+[Package|Thunder VB Test pack|Configure Registry Files]
+Applicable=No
+
+[Package|Thunder VB Test pack|Configure Remote Servers]
+Applicable=No
+
+[Package|Thunder VB Test pack|Install Locations]
+C:\develop\vb\vb-projects\ThunderVB\ThunderVB_bin\ThunderVB.dll=$(AppPath)
+C:\WINDOWS\system32\msvbvm60.dll=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEAUT32.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\OLEPRO32.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\ASYCFILT.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\STDOLE2.TLB=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\COMCAT.DLL=$(WinSysPathSysFile)
+C:\WINDOWS\system32\psapi.dll=$(WinSysPath)
+C:\develop\vb\vb-projects\ThunderVB\ThunderVB_bin\ndisasm_dll.dll=$(AppPath)
+C:\Program Files\Common Files\Microsoft Shared\OFFICE11\MSO.DLL=$(WinSysPath)
+C:\WINDOWS\system32\scrrun.dll=$(WinSysPath)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\MSVCRT.DLL=$(WinSysPathSysFile)
+C:\Documents and Settings\Darken\Desktop\Create_and1791579102004\AllApiDemo\WinApiForVb_tlb\WinApiForVb\Release\WinApiForVb.tlb=$(AppPath)
+C:\WINDOWS\system32\TABCTL32.OCX=$(WinSysPath)
+C:\WINDOWS\system32\COMDLG32.OCX=$(WinSysPath)
+C:\WINDOWS\system32\MSCOMCTL.OCX=$(WinSysPath)
+C:\WINDOWS\system32\MSCOMCT2.OCX=$(WinSysPath)
+C:\WINDOWS\system32\COMCT332.OCX=$(WinSysPath)
+C:\WINDOWS\system32\RICHTX32.OCX=$(WinSysPath)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\Redist\RICHED32.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP.EXE=$(AppPath)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\SETUP1.EXE=$(WinPath)
+C:\WINDOWS\system32\VB6STKIT.DLL=$(WinSysPathSysFile)
+C:\Program Files\Microsoft Visual Studio\VB98\Wizards\PDWizard\ST6UNST.EXE=$(WinPath)
+
+[Package|Thunder VB Test pack|Configure Shared Files]
+Applicable=Yes
+C:\develop\vb\vb-projects\ThunderVB\ThunderVB_bin\ThunderVB.dll=No
+C:\develop\vb\vb-projects\ThunderVB\ThunderVB_bin\ndisasm_dll.dll=No
+C:\Documents and Settings\Darken\Desktop\Create_and1791579102004\AllApiDemo\WinApiForVb_tlb\WinApiForVb\Release\WinApiForVb.tlb=No
+
+[Package|Thunder VB Test pack|Distribution]
+Type=single
+Size=
+Title=ThunderVB Beta 1
+
+[Package|Thunder VB Test pack|IconGroups]
+Group0=ThunderVB
+PrivateGroup0=0
+Parent0=$(Programs)
+
+[Package|Thunder VB Test pack|Package]
+PackageFolder=C:\develop\vb\vb-projects\Package
+ProjectFolder=C:\develop\vb\vb-projects\ThunderVB
+ServerSideCab=
+File1=C:\develop\vb\vb-projects\Package\setup.exe
+File2=C:\develop\vb\vb-projects\Package\Setup.Lst
+File3=C:\develop\vb\vb-projects\Package\ThunderVB.CAB
+Handler1=PDWizard.FolderDplySubWiz
+Handler2=PDWizard.WebPostDplySubWiz
